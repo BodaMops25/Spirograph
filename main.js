@@ -1,5 +1,7 @@
 'use strict'
 
+import {Spirograph} from "./functions.js"
+
 const cnvs = document.querySelector('#cnvs'),
       ctx = cnvs.getContext('2d')
 
@@ -8,61 +10,6 @@ cnvs.height = innerHeight
 
 cnvs.style.width = innerWidth
 cnvs.style.height = innerHeight
-
-function Spirograph({
-  r = 70,
-  d = 35,
-  R = 20,
-  angle = 0,
-  saturation = 100,
-  lightness = 50,
-  alpha = 0.2,
-  colorType = 1,
-  step = 1,
-  fps = 60,
-  scale = 1,
-  context
-}) {
-
-  this.scale = scale
-  this.r = r * this.scale
-  this.d = d * this.scale
-  this.R = R * this.scale
-  this.angle = angle
-  this.x = 0
-  this.y = 0
-  this.saturation = saturation
-  this.lightness = lightness
-  this.alpha = alpha
-  this.hsla = `hsla(${this.angle}, ${this.saturation}%, ${this.lightness}%, ${this.alpha})`
-  this.colorType = colorType
-  this.step = step
-  this.fps = fps
-  this.ctx = context
-
-  this.calcCoords = () => {
-
-    const radiusDelta = this.R - this.r,
-          angleRadians = this.angle / 180 * Math.PI
-
-    this.x = radiusDelta * Math.cos(angleRadians) + this.d * Math.cos((radiusDelta / this.r) * angleRadians)
-    this.y = radiusDelta * Math.sin(angleRadians) + this.d * Math.sin((radiusDelta / this.r) * angleRadians)
-
-    this.angle += this.step
-  }
-
-  this.render = () => {
-    this.ctx.beginPath()
-    this.ctx.arc(this.x + cnvs.width / 2, this.y + cnvs.height / 2, 5, 0, Math.PI * 2)
-    this.ctx.fillStyle = this.hsla
-    this.ctx.fill()
-
-    if(this.colorType == 1) this.hsla = `hsla(${this.angle}, ${this.saturation}%, ${this.lightness}%, ${this.alpha})`
-    else if(this.colorType == 2) this.hsla = this.hsla
-  }
-
-  this.clear = () => ctx.clearRect(0, 0, cnvs.width, cnvs.height)
-}
 
 const spirograph = new Spirograph({context: ctx, fps: 120, step: 1, scale: 2})
 
