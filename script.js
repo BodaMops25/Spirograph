@@ -1,3 +1,3 @@
-const foo = require('./function')
+import foo from './function.js'
 
 console.log(foo(234, -4))
