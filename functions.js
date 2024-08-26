@@ -1,10 +1,10 @@
-function calcSpirographCoords({r, R, d, angle} = {}) {
+function calcSpirographCoords({ r, R, d, angle } = {}) {
   const radiusDelta = R - r,
         angleRadians = angle / 180 * Math.PI
 
   return {
-    x: radiusDelta * Math.cos(angleRadians) + d * Math.cos((radiusDelta / r) * angleRadians),
-    y: radiusDelta * Math.sin(angleRadians) + d * Math.sin((radiusDelta / r) * angleRadians)
+    x: +(radiusDelta * Math.cos(angleRadians) + d * Math.cos((radiusDelta / r) * angleRadians)),
+    y: +(radiusDelta * Math.sin(angleRadians) + d * Math.sin((radiusDelta / r) * angleRadians))
   }
 }
 
@@ -41,7 +41,7 @@ function Spirograph({
 
   this.calcCoords = () => {
 
-    const {x, y} = calcSpirographCoords({r: this.r, R: this.R, d: this.d, angle: this.angle})
+    const {x, y} = calcSpirographCoords({ r: this.r, R: this.R, d: this.d, angle: this.angle })
 
     this.x = x
     this.y = y
@@ -54,8 +54,8 @@ function Spirograph({
     this.ctx.fillStyle = this.hsla
     this.ctx.fill()
 
-    if(this.colorType == 1) this.hsla = `hsla(${this.angle}, ${this.saturation}%, ${this.lightness}%, ${this.alpha})`
-    else if(this.colorType == 2) this.hsla = this.hsla
+    if (this.colorType == 1) this.hsla = `hsla(${this.angle}, ${this.saturation}%, ${this.lightness}%, ${this.alpha})`
+    else if (this.colorType == 2) this.hsla = this.hsla
   }
 
   this.clear = () => ctx.clearRect(0, 0, cnvs.width, cnvs.height)
