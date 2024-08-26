@@ -2,7 +2,9 @@
   "name": "spirograph",
   "version": "1.0.0",
   "main": "main.js",
-  "scripts": {},
+  "scripts": {
+    "build": "tsc *"
+  },
   "author": "BodaMops25",
   "license": "ISC",
   "description": ""
